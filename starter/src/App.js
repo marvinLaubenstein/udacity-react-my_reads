@@ -3,7 +3,7 @@ import SearchBookPage from './SearchBookPage';
 import { Route, Routes } from 'react-router-dom';
 import BookShelf from './BookShelf';
 
-function App() {
+const App = () => {
   return (
     <Routes>
       <Route exact path="/" element={<BookShelf></BookShelf>}></Route>
@@ -14,6 +14,6 @@ function App() {
       ></Route>
     </Routes>
   );
-}
+};
 
 export default App;

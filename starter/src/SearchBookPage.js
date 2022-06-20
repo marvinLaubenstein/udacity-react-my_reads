@@ -9,7 +9,11 @@ const SearchBookPage = () => {
           Close
         </Link>
         <div className="search-books-input-wrapper">
-          <input type="text" placeholder="Search by title, author, or ISBN" />
+          <input
+            type="text"
+            name="book-data"
+            placeholder="Search by title, author, or ISBN"
+          />
         </div>
       </div>
       <div className="search-books-results">
