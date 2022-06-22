@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Book from './Book';
 
-const SearchBookPage = () => {
+const SearchBookPage = ({ resbooks }) => {
   return (
     <div className="search-books">
       <div className="search-books-bar">
@@ -19,6 +20,19 @@ const SearchBookPage = () => {
       <div className="search-books-results">
         <ol className="books-grid"></ol>
       </div>
+      <ol className="books-grid">
+        {resbooks.map((book) => console.log(book))}
+        {resbooks.map((book) => (
+          <li key={book.id}>
+            <Book
+              key={book.id}
+              title={book.title}
+              cover={book.imageLinks.thumbnail}
+              authors={book.authors}
+            ></Book>
+          </li>
+        ))}
+      </ol>
     </div>
   );
 };
