@@ -1,11 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Book from './Book';
-import BookShelfChanger from './BookShelfChanger';
 
 /** TODO: -Note the size of the book cover*/
 
-const BookShelf = ({ books }) => {
+const BookShelf = ({ books, onBookUpdate }) => {
+  const handleBookOptionChange = (bookData, option) => {
+    console.log(
+      'Option in booksearch: ' + option + ' (' + bookData.title + ') '
+    );
+    onBookUpdate(bookData, option);
+  };
   return (
     <div className="list-books">
       <div className="list-books-title">
@@ -23,9 +28,8 @@ const BookShelf = ({ books }) => {
                   <li key={currentlyReadingBook.id}>
                     <Book
                       key={currentlyReadingBook.id}
-                      title={currentlyReadingBook.title}
-                      cover={currentlyReadingBook.imageLinks.thumbnail}
-                      authors={currentlyReadingBook.authors}
+                      bookData={currentlyReadingBook}
+                      onBookOptionChange={handleBookOptionChange}
                     ></Book>
                   </li>
                 ))}
@@ -42,9 +46,8 @@ const BookShelf = ({ books }) => {
                     <li key={currentlyReadingBook.id}>
                       <Book
                         key={currentlyReadingBook.id}
-                        title={currentlyReadingBook.title}
-                        cover={currentlyReadingBook.imageLinks.thumbnail}
-                        authors={currentlyReadingBook.authors}
+                        bookData={currentlyReadingBook}
+                        onBookOptionChange={handleBookOptionChange}
                       ></Book>
                     </li>
                   ))}{' '}
@@ -62,9 +65,8 @@ const BookShelf = ({ books }) => {
                     <li key={currentlyReadingBook.id}>
                       <Book
                         key={currentlyReadingBook.id}
-                        title={currentlyReadingBook.title}
-                        cover={currentlyReadingBook.imageLinks.thumbnail}
-                        authors={currentlyReadingBook.authors}
+                        bookData={currentlyReadingBook}
+                        onBookOptionChange={handleBookOptionChange}
                       ></Book>
                     </li>
                   ))}{' '}

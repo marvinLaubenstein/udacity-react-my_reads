@@ -11,23 +11,44 @@ const App = () => {
   useEffect(() => {
     const getBooks = async () => {
       const response = await BooksAPI.getAll();
+      console.log(response);
       setBooks(response);
     };
-
     getBooks();
   }, []);
+
+  const handleBookUpdate = (book, changedOption) => {
+    console.log('App ' + book.title + ' ' + changedOption);
+    const updateBooks = async () => {
+      await BooksAPI.update(book, changedOption);
+    };
+    const getBooks = async () => {
+      const response = await BooksAPI.getAll();
+      setBooks(response);
+    };
+    //problem with none as shelf value
+    if (changedOption !== 'none') updateBooks();
+    getBooks();
+  };
 
   return (
     <Routes>
       <Route
         exact
         path="/"
-        element={<BookShelf books={books}></BookShelf>}
+        element={
+          <BookShelf books={books} onBookUpdate={handleBookUpdate}></BookShelf>
+        }
       ></Route>
       <Route
         exact
         path="/search"
-        element={<SearchBookPage resbooks={books}></SearchBookPage>}
+        element={
+          <SearchBookPage
+            resbooks={books}
+            onBookUpdate={handleBookUpdate}
+          ></SearchBookPage>
+        }
       ></Route>
     </Routes>
   );
