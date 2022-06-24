@@ -11,7 +11,6 @@ const BookShelfTray = ({
     <div className="bookshelf-tray">
       <h2 className="bookshelf-title">{trayTitle}</h2>
       <div className="bookshelf-books">
-        {books.map((book) => console.log(book))}
         <ol className="books-grid">
           {books
             .filter((book) => book.shelf === bookShelfCategory)

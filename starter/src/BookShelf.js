@@ -1,15 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Book from './Book';
 import BookShelfTray from './BookShelfTray';
 
 /** TODO: -Note the size of the book cover*/
 
 const BookShelf = ({ books, onBookUpdate }) => {
   const handleBookOptionChange = (bookData, option) => {
-    console.log(
-      'Option in booksearch: ' + option + ' (' + bookData.title + ') '
-    );
     onBookUpdate(bookData, option);
   };
   return (
