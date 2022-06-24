@@ -11,13 +11,14 @@ const App = () => {
   useEffect(() => {
     const getBooks = async () => {
       const response = await BooksAPI.getAll();
-      //     console.log(response);
       setBooks(response);
+      console.log(response);
     };
     getBooks();
   }, []);
 
   const handleBookUpdate = (book, changedOption) => {
+    console.log('heres' + book + changedOption);
     const updateBooks = async () => {
       await BooksAPI.update(book, changedOption);
       const response = await BooksAPI.getAll();
@@ -41,7 +42,7 @@ const App = () => {
         path="/search"
         element={
           <SearchBookPage
-            resbooks={books}
+            books={books}
             onBookUpdate={handleBookUpdate}
           ></SearchBookPage>
         }

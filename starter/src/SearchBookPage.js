@@ -1,49 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Book from './Book';
+import * as BooksAPI from './utils/BooksAPI';
 
 /** TODO: -search directly from API */
 
-const SearchBookPage = ({ resbooks, onBookUpdate }) => {
+const SearchBookPage = ({ books, onBookUpdate }) => {
   const [query, setQuery] = useState('');
+  const [resbooks, setResBooks] = useState('');
 
   const updateQuery = (queryValue) => {
     setQuery(queryValue);
   };
 
-  const handleBookOptionChange = (bookData, option) => {
-    console.log(
-      'Option in booksearch: ' + option + ' (' + bookData.title + ') '
+  useEffect(() => {
+    console.log('here', query);
+    const getBooks = async () => {
+      const response = await BooksAPI.search(String(query));
+      response.error !== 'empty query'
+        ? compareWithShelfBooks(response)
+        : setResBooks('');
+    };
+    query !== '' ? getBooks() : setResBooks('');
+  }, [query]);
+
+  const compareWithShelfBooks = (responseBooks) => {
+    const bookUpdates = Object.fromEntries(
+      books.map((temp) => [temp.id, temp])
     );
-    onBookUpdate(bookData, option);
+    const updatedBooks = responseBooks.map(
+      (temp) => bookUpdates[temp.id] || temp
+    );
+    console.log(updatedBooks);
+    setResBooks(updatedBooks);
   };
-
-  const queryBooks =
-    query === ''
-      ? null
-      : resbooks.filter((book) => checkBookIncludingQuery(book));
-
-  function checkBookIncludingQuery(book) {
-    let isTitleMatching = book.title
-      .toLowerCase()
-      .includes(query.toLowerCase());
-
-    let isAuthorsMatching = false;
-    book.authors.map((author) =>
-      author.toLowerCase().includes(query.toLowerCase())
-        ? (isAuthorsMatching = true)
-        : ''
-    );
-
-    let isISBNMatching = false;
-    book.industryIdentifiers.map((industryIdentifier) =>
-      industryIdentifier.identifier.includes(query.toLowerCase())
-        ? (isAuthorsMatching = true)
-        : ''
-    );
-    return isTitleMatching || isAuthorsMatching || isISBNMatching;
-  }
 
   return (
     <div className="search-books">
@@ -65,17 +56,21 @@ const SearchBookPage = ({ resbooks, onBookUpdate }) => {
         <ol className="books-grid"></ol>
       </div>
       <ol className="books-grid">
-        {queryBooks !== null
-          ? queryBooks.map((book) => (
-              <li key={book.id}>
-                <Book
-                  key={book.id}
-                  bookData={book}
-                  onBookOptionChange={handleBookOptionChange}
-                ></Book>
-              </li>
-            ))
-          : ''}
+        {resbooks ? (
+          resbooks.map((book) => (
+            <li key={book.id}>
+              <Book
+                key={book.id}
+                bookData={book}
+                onBookOptionChange={onBookUpdate}
+              ></Book>
+            </li>
+          ))
+        ) : (
+          <div>
+            <p>No Books found</p>
+          </div>
+        )}
       </ol>
     </div>
   );

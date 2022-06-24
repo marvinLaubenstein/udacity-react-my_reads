@@ -7,7 +7,7 @@ const BookShelfChanger = ({ shelf, onOptionChange }) => {
   const [selected, setSelected] = useState('');
 
   useState(() => {
-    setSelected(shelf);
+    shelf === undefined ? setSelected('none') : setSelected(shelf);
   });
 
   const handleChange = (event) => {

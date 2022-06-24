@@ -1,10 +1,17 @@
 import React from 'react';
 import BookShelfChanger from './BookShelfChanger';
 
-const Book = ({ bookData, onBookOptionChange }) => {
+const Book = ({ bookData, onBookOptionChange, shelf }) => {
   const handleOptionChange = (option) => {
     onBookOptionChange(bookData, option);
-    console.log('Option in book: ' + option);
+  };
+
+  const getThumbnail = () => {
+    let thumbnail;
+    bookData?.imageLinks?.thumbnail
+      ? (thumbnail = `url(${bookData.imageLinks.thumbnail})`)
+      : (thumbnail = ``);
+    return thumbnail;
   };
 
   return (
@@ -15,7 +22,7 @@ const Book = ({ bookData, onBookOptionChange }) => {
           style={{
             width: 128,
             height: 193,
-            backgroundImage: `url(${bookData.imageLinks.thumbnail})`,
+            backgroundImage: getThumbnail(),
           }}
         ></div>
         <BookShelfChanger
