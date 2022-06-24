@@ -65,7 +65,6 @@ const SearchBookPage = ({ resbooks, onBookUpdate }) => {
         <ol className="books-grid"></ol>
       </div>
       <ol className="books-grid">
-        {queryBooks !== null ? queryBooks.map((book) => console.log(book)) : ''}
         {queryBooks !== null
           ? queryBooks.map((book) => (
               <li key={book.id}>

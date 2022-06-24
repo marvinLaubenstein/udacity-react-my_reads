@@ -11,24 +11,20 @@ const App = () => {
   useEffect(() => {
     const getBooks = async () => {
       const response = await BooksAPI.getAll();
-      console.log(response);
+      //     console.log(response);
       setBooks(response);
     };
     getBooks();
   }, []);
 
   const handleBookUpdate = (book, changedOption) => {
-    console.log('App ' + book.title + ' ' + changedOption);
     const updateBooks = async () => {
       await BooksAPI.update(book, changedOption);
-    };
-    const getBooks = async () => {
       const response = await BooksAPI.getAll();
       setBooks(response);
     };
     //problem with none as shelf value
     if (changedOption !== 'none') updateBooks();
-    getBooks();
   };
 
   return (

@@ -19,6 +19,7 @@ const Book = ({ bookData, onBookOptionChange }) => {
           }}
         ></div>
         <BookShelfChanger
+          shelf={bookData.shelf}
           onOptionChange={handleOptionChange}
         ></BookShelfChanger>
       </div>
