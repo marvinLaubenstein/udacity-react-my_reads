@@ -3,11 +3,20 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Book from './Book';
 
-const SearchBookPage = ({ resbooks }) => {
+/** TODO: -search directly from API */
+
+const SearchBookPage = ({ resbooks, onBookUpdate }) => {
   const [query, setQuery] = useState('');
 
   const updateQuery = (queryValue) => {
     setQuery(queryValue);
+  };
+
+  const handleBookOptionChange = (bookData, option) => {
+    console.log(
+      'Option in booksearch: ' + option + ' (' + bookData.title + ') '
+    );
+    onBookUpdate(bookData, option);
   };
 
   const queryBooks =
@@ -56,15 +65,13 @@ const SearchBookPage = ({ resbooks }) => {
         <ol className="books-grid"></ol>
       </div>
       <ol className="books-grid">
-        {queryBooks !== null ? queryBooks.map((book) => console.log(book)) : ''}
         {queryBooks !== null
           ? queryBooks.map((book) => (
               <li key={book.id}>
                 <Book
                   key={book.id}
-                  title={book.title}
-                  cover={book.imageLinks.thumbnail}
-                  authors={book.authors}
+                  bookData={book}
+                  onBookOptionChange={handleBookOptionChange}
                 ></Book>
               </li>
             ))

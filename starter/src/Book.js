@@ -1,8 +1,12 @@
 import React from 'react';
-import { useState } from 'react';
 import BookShelfChanger from './BookShelfChanger';
 
-const Book = ({ title, cover, authors }) => {
+const Book = ({ bookData, onBookOptionChange }) => {
+  const handleOptionChange = (option) => {
+    onBookOptionChange(bookData, option);
+    console.log('Option in book: ' + option);
+  };
+
   return (
     <div className="book">
       <div className="book-top">
@@ -11,13 +15,16 @@ const Book = ({ title, cover, authors }) => {
           style={{
             width: 128,
             height: 193,
-            backgroundImage: `url(${cover})`,
+            backgroundImage: `url(${bookData.imageLinks.thumbnail})`,
           }}
         ></div>
-        <BookShelfChanger></BookShelfChanger>
+        <BookShelfChanger
+          shelf={bookData.shelf}
+          onOptionChange={handleOptionChange}
+        ></BookShelfChanger>
       </div>
-      <div className="book-title">{title}</div>
-      <div className="book-authors">{authors}</div>
+      <div className="book-title">{bookData.title}</div>
+      <div className="book-authors">{bookData.authors}</div>
     </div>
   );
 };
