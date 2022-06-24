@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Book from './Book';
+import BookShelfTray from './BookShelfTray';
 
 /** TODO: -Note the size of the book cover*/
 
@@ -18,59 +19,24 @@ const BookShelf = ({ books, onBookUpdate }) => {
       </div>
       <div className="list-books-content">
         <div className="bookshelf">
-          <h2 className="bookshelf-title">Currently Reading</h2>
-          <div className="bookshelf-books">
-            {books.map((book) => console.log(book))}
-            <ol className="books-grid">
-              {books
-                .filter((book) => book.shelf === 'currentlyReading')
-                .map((currentlyReadingBook) => (
-                  <li key={currentlyReadingBook.id}>
-                    <Book
-                      key={currentlyReadingBook.id}
-                      bookData={currentlyReadingBook}
-                      onBookOptionChange={handleBookOptionChange}
-                    ></Book>
-                  </li>
-                ))}
-            </ol>
-          </div>
-          <div className="bookshelf">
-            <h2 className="bookshelf-title">Want to Read</h2>
-            <div className="bookshelf-books">
-              <ol className="books-grid">
-                {books
-                  .filter((book) => book.shelf === 'wantToRead')
-                  .map((currentlyReadingBook) => (
-                    <li key={currentlyReadingBook.id}>
-                      <Book
-                        key={currentlyReadingBook.id}
-                        bookData={currentlyReadingBook}
-                        onBookOptionChange={handleBookOptionChange}
-                      ></Book>
-                    </li>
-                  ))}
-              </ol>
-            </div>
-          </div>
-          <div className="bookshelf">
-            <h2 className="bookshelf-title">Read</h2>
-            <div className="bookshelf-books">
-              <ol className="books-grid">
-                {books
-                  .filter((book) => book.shelf === 'read')
-                  .map((currentlyReadingBook) => (
-                    <li key={currentlyReadingBook.id}>
-                      <Book
-                        key={currentlyReadingBook.id}
-                        bookData={currentlyReadingBook}
-                        onBookOptionChange={handleBookOptionChange}
-                      ></Book>
-                    </li>
-                  ))}
-              </ol>
-            </div>
-          </div>
+          <BookShelfTray
+            trayTitle={'Currently Reading'}
+            bookShelfCategory={'currentlyReading'}
+            books={books}
+            onBookOptionChange={handleBookOptionChange}
+          ></BookShelfTray>
+          <BookShelfTray
+            trayTitle={'Want to Read'}
+            bookShelfCategory={'wantToRead'}
+            books={books}
+            onBookOptionChange={handleBookOptionChange}
+          ></BookShelfTray>
+          <BookShelfTray
+            trayTitle={'Read'}
+            bookShelfCategory={'read'}
+            books={books}
+            onBookOptionChange={handleBookOptionChange}
+          ></BookShelfTray>
         </div>
       </div>
       <div className="open-search">
