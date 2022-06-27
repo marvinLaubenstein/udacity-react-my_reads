@@ -1,31 +1,30 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import SearchBookPage from './SearchBookPage';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import BookShelf from './BookShelf';
 import * as BooksAPI from './utils/BooksAPI';
 
 const App = () => {
+  let navigate = useNavigate();
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
     const getBooks = async () => {
       const response = await BooksAPI.getAll();
       setBooks(response);
-      console.log(response);
     };
     getBooks();
   }, []);
 
   const handleBookUpdate = (book, changedOption) => {
-    console.log('heres' + book + changedOption);
     const updateBooks = async () => {
       await BooksAPI.update(book, changedOption);
       const response = await BooksAPI.getAll();
       setBooks(response);
     };
-    //problem with none as shelf value
-    if (changedOption !== 'none') updateBooks();
+    updateBooks();
+    navigate('/');
   };
 
   return (

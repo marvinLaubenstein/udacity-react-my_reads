@@ -2,10 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import BookShelfTray from './BookShelfTray';
 
-/** TODO: -Note the size of the book cover*/
-
 const BookShelf = ({ books, onBookUpdate }) => {
-  const handleBookOptionChange = (bookData, option) => {
+  const handleBookShelfUpdate = (bookData, option) => {
     onBookUpdate(bookData, option);
   };
   return (
@@ -19,19 +17,19 @@ const BookShelf = ({ books, onBookUpdate }) => {
             trayTitle={'Currently Reading'}
             bookShelfCategory={'currentlyReading'}
             books={books}
-            onBookOptionChange={handleBookOptionChange}
+            onBookShelfUpdate={handleBookShelfUpdate}
           ></BookShelfTray>
           <BookShelfTray
             trayTitle={'Want to Read'}
             bookShelfCategory={'wantToRead'}
             books={books}
-            onBookOptionChange={handleBookOptionChange}
+            onBookShelfUpdate={handleBookShelfUpdate}
           ></BookShelfTray>
           <BookShelfTray
             trayTitle={'Read'}
             bookShelfCategory={'read'}
             books={books}
-            onBookOptionChange={handleBookOptionChange}
+            onBookShelfUpdate={handleBookShelfUpdate}
           ></BookShelfTray>
         </div>
       </div>

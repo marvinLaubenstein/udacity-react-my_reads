@@ -1,9 +1,9 @@
 import React from 'react';
 import BookShelfChanger from './BookShelfChanger';
 
-const Book = ({ bookData, onBookOptionChange, shelf }) => {
-  const handleOptionChange = (option) => {
-    onBookOptionChange(bookData, option);
+const Book = ({ bookData, onBookUpdate }) => {
+  const handleBookShelfUpdate = (option) => {
+    onBookUpdate(bookData, option);
   };
 
   const getThumbnail = () => {
@@ -27,7 +27,7 @@ const Book = ({ bookData, onBookOptionChange, shelf }) => {
         ></div>
         <BookShelfChanger
           shelf={bookData.shelf}
-          onOptionChange={handleOptionChange}
+          onBookShelfUpdate={handleBookShelfUpdate}
         ></BookShelfChanger>
       </div>
       <div className="book-title">{bookData.title}</div>

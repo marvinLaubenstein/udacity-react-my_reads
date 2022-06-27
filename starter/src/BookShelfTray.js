@@ -5,7 +5,7 @@ const BookShelfTray = ({
   trayTitle,
   bookShelfCategory,
   books,
-  onBookOptionChange,
+  onBookShelfUpdate,
 }) => {
   return (
     <div className="bookshelf-tray">
@@ -19,7 +19,7 @@ const BookShelfTray = ({
                 <Book
                   key={currentlyReadingBook.id}
                   bookData={currentlyReadingBook}
-                  onBookOptionChange={onBookOptionChange}
+                  onBookUpdate={onBookShelfUpdate}
                 ></Book>
               </li>
             ))}
