@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import BookShelfTray from './BookShelfTray';
 
 const BookShelf = ({ books, onBookUpdate }) => {
+  const handleBookShelfUpdate = (bookData, option) => {
+    onBookUpdate(bookData, option);
+  };
   const shelfTrays = [
     {
       title: 'Currently Reading',
@@ -17,9 +20,6 @@ const BookShelf = ({ books, onBookUpdate }) => {
     { title: 'Read', category: 'read', id: 'readShelfTray' },
   ];
 
-  const handleBookShelfUpdate = (bookData, option) => {
-    onBookUpdate(bookData, option);
-  };
   return (
     <div className="list-books">
       <div className="list-books-title">

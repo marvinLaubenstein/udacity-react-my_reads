@@ -20,10 +20,11 @@ const SearchBookPage = ({ books, onBookUpdate }) => {
           ? compareResWithShelfBooks(res, books)
           : setResBooks();
       };
+      console.log(queryValue);
       queryValue !== '' ? fetch() : setResBooks();
     }, 500);
     return () => clearTimeout(timeOut);
-  }, [queryValue]);
+  }, [books, queryValue]);
 
   const compareResWithShelfBooks = (resBooks, shelfBooks) => {
     const bookUpdates = Object.fromEntries(

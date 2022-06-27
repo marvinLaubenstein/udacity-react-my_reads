@@ -5,9 +5,10 @@ import { useState } from 'react';
 
 const BookShelfChanger = ({ shelf, onBookShelfUpdate }) => {
   const [selected, setSelected] = useState('');
+  const isShelfUndefined = shelf === undefined;
 
   useState(() => {
-    shelf === undefined ? setSelected('none') : setSelected(shelf);
+    isShelfUndefined ? setSelected('none') : setSelected(shelf);
   });
 
   const handleChange = (event) => {
@@ -19,12 +20,12 @@ const BookShelfChanger = ({ shelf, onBookShelfUpdate }) => {
     <div className="book-shelf-changer">
       <select onChange={handleChange} value={selected}>
         <option value="none" disabled>
-          Move to...
+          {isShelfUndefined ? 'Add to' : 'Move to...'}
         </option>
         <option value="currentlyReading">Currently Reading</option>
         <option value="wantToRead">Want to Read</option>
         <option value="read">Read</option>
-        <option value="none">None</option>
+        {isShelfUndefined ? '' : <option value="none">None</option>}
       </select>
     </div>
   );

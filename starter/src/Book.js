@@ -7,11 +7,15 @@ const Book = ({ bookData, onBookUpdate }) => {
   };
 
   const getThumbnail = () => {
-    let thumbnail;
-    bookData?.imageLinks?.thumbnail
-      ? (thumbnail = `url(${bookData.imageLinks.thumbnail})`)
-      : (thumbnail = ``);
+    const thumbnail = bookData?.imageLinks?.thumbnail
+      ? `url(${bookData.imageLinks.thumbnail})`
+      : ``;
     return thumbnail;
+  };
+
+  const getAuthors = () => {
+    const authors = bookData?.authors ? bookData.authors.join(', ') : ``;
+    return authors;
   };
 
   return (
@@ -31,7 +35,7 @@ const Book = ({ bookData, onBookUpdate }) => {
         ></BookShelfChanger>
       </div>
       <div className="book-title">{bookData.title}</div>
-      <div className="book-authors">{bookData.authors}</div>
+      <div className="book-authors">{getAuthors()}</div>
     </div>
   );
 };
