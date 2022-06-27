@@ -3,16 +3,16 @@ import { useState } from 'react';
 
 /**TODO: sign selected value */
 
-const BookShelfChanger = ({ shelf, onOptionChange }) => {
+const BookShelfChanger = ({ shelf, onBookShelfUpdate }) => {
   const [selected, setSelected] = useState('');
 
   useState(() => {
-    setSelected(shelf);
+    shelf === undefined ? setSelected('none') : setSelected(shelf);
   });
 
   const handleChange = (event) => {
     setSelected(event.target.value);
-    onOptionChange(event.target.value);
+    onBookShelfUpdate(event.target.value);
   };
 
   return (

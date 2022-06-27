@@ -1,17 +1,17 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import SearchBookPage from './SearchBookPage';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import BookShelf from './BookShelf';
 import * as BooksAPI from './utils/BooksAPI';
 
 const App = () => {
+  let navigate = useNavigate();
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
     const getBooks = async () => {
       const response = await BooksAPI.getAll();
-      //     console.log(response);
       setBooks(response);
     };
     getBooks();
@@ -23,8 +23,8 @@ const App = () => {
       const response = await BooksAPI.getAll();
       setBooks(response);
     };
-    //problem with none as shelf value
-    if (changedOption !== 'none') updateBooks();
+    updateBooks();
+    navigate('/');
   };
 
   return (
@@ -41,7 +41,7 @@ const App = () => {
         path="/search"
         element={
           <SearchBookPage
-            resbooks={books}
+            books={books}
             onBookUpdate={handleBookUpdate}
           ></SearchBookPage>
         }
