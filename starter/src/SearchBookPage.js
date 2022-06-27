@@ -4,35 +4,32 @@ import { useState, useEffect } from 'react';
 import Book from './Book';
 import * as BooksAPI from './utils/BooksAPI';
 
-/** TODO: -search directly from API */
-
 const SearchBookPage = ({ books, onBookUpdate }) => {
-  const [query, setQuery] = useState('');
+  const [queryValue, setQueryValue] = useState('');
   const [resbooks, setResBooks] = useState('');
 
-  const updateQuery = (queryValue) => {
-    setQuery(queryValue);
+  const updateQueryValue = (queryValue) => {
+    setQueryValue(queryValue);
   };
 
   useEffect(() => {
-    console.log('here', query);
-    const getBooks = async () => {
-      const response = await BooksAPI.search(String(query));
-      response.error !== 'empty query'
-        ? compareWithShelfBooks(response)
-        : setResBooks('');
-    };
-    query !== '' ? getBooks() : setResBooks('');
-  }, [query]);
+    const timeOut = setTimeout(() => {
+      const fetch = async () => {
+        const res = await BooksAPI.search(String(queryValue));
+        res.error !== 'empty query'
+          ? compareResWithShelfBooks(res, books)
+          : setResBooks();
+      };
+      queryValue !== '' ? fetch() : setResBooks();
+    }, 500);
+    return () => clearTimeout(timeOut);
+  }, [queryValue]);
 
-  const compareWithShelfBooks = (responseBooks) => {
+  const compareResWithShelfBooks = (resBooks, shelfBooks) => {
     const bookUpdates = Object.fromEntries(
-      books.map((temp) => [temp.id, temp])
+      shelfBooks.map((temp) => [temp.id, temp])
     );
-    const updatedBooks = responseBooks.map(
-      (temp) => bookUpdates[temp.id] || temp
-    );
-    console.log(updatedBooks);
+    const updatedBooks = resBooks.map((temp) => bookUpdates[temp.id] || temp);
     setResBooks(updatedBooks);
   };
 
@@ -47,8 +44,8 @@ const SearchBookPage = ({ books, onBookUpdate }) => {
             type="text"
             name="book-data"
             placeholder="Search by title, author, or ISBN"
-            value={query}
-            onChange={(event) => updateQuery(event.target.value)}
+            value={queryValue}
+            onChange={(event) => updateQueryValue(event.target.value)}
           />
         </div>
       </div>
@@ -62,7 +59,7 @@ const SearchBookPage = ({ books, onBookUpdate }) => {
               <Book
                 key={book.id}
                 bookData={book}
-                onBookOptionChange={onBookUpdate}
+                onBookUpdate={onBookUpdate}
               ></Book>
             </li>
           ))
