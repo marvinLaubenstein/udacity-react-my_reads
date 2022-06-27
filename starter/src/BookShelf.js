@@ -3,6 +3,20 @@ import { Link } from 'react-router-dom';
 import BookShelfTray from './BookShelfTray';
 
 const BookShelf = ({ books, onBookUpdate }) => {
+  const shelfTrays = [
+    {
+      title: 'Currently Reading',
+      category: 'currentlyReading',
+      id: 'currentlyReadingShelfTray',
+    },
+    {
+      title: 'Want to Read',
+      category: 'wantToRead',
+      id: 'wantToReadShelfTray',
+    },
+    { title: 'Read', category: 'read', id: 'readShelfTray' },
+  ];
+
   const handleBookShelfUpdate = (bookData, option) => {
     onBookUpdate(bookData, option);
   };
@@ -13,24 +27,17 @@ const BookShelf = ({ books, onBookUpdate }) => {
       </div>
       <div className="list-books-content">
         <div className="bookshelf">
-          <BookShelfTray
-            trayTitle={'Currently Reading'}
-            bookShelfCategory={'currentlyReading'}
-            books={books}
-            onBookShelfUpdate={handleBookShelfUpdate}
-          ></BookShelfTray>
-          <BookShelfTray
-            trayTitle={'Want to Read'}
-            bookShelfCategory={'wantToRead'}
-            books={books}
-            onBookShelfUpdate={handleBookShelfUpdate}
-          ></BookShelfTray>
-          <BookShelfTray
-            trayTitle={'Read'}
-            bookShelfCategory={'read'}
-            books={books}
-            onBookShelfUpdate={handleBookShelfUpdate}
-          ></BookShelfTray>
+          {shelfTrays.map((shelfTray) => {
+            return (
+              <BookShelfTray
+                key={shelfTray.id}
+                trayTitle={shelfTray.title}
+                bookShelfCategory={shelfTray.category}
+                books={books}
+                onBookShelfUpdate={handleBookShelfUpdate}
+              ></BookShelfTray>
+            );
+          })}
         </div>
       </div>
       <div className="open-search">
