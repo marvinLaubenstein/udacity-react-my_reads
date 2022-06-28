@@ -24,14 +24,25 @@ const SearchBookPage = ({ books, onBookUpdate }) => {
       queryValue !== '' ? fetch() : setResBooks();
     }, 500);
     return () => clearTimeout(timeOut);
-  }, [books, queryValue]);
+  });
 
   const compareResWithShelfBooks = (resBooks, shelfBooks) => {
     const bookUpdates = Object.fromEntries(
       shelfBooks.map((temp) => [temp.id, temp])
     );
     const updatedBooks = resBooks.map((temp) => bookUpdates[temp.id] || temp);
-    setResBooks(updatedBooks);
+    handleMissingShelfs(updatedBooks);
+  };
+
+  const handleMissingShelfs = (updatedBooks) => {
+    let resBooksUpdateArray = [];
+    updatedBooks.forEach((updatedBook) => {
+      updatedBook.hasOwnProperty('shelf')
+        ? void 0
+        : (updatedBook.shelf = 'none');
+      resBooksUpdateArray.push(updatedBook);
+    });
+    setResBooks(resBooksUpdateArray);
   };
 
   return (
