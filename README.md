@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 This project is my variant of the My Reads project created for Udacity's React course. 
-It is a simple book shelf management system with its own bookshelf and a possibility to integrate books from a provided API. 
+It is a simple bookshelf management system with its own bookshelf and a possibility to integrate books from a provided API. 
 
 ## Installation
 
