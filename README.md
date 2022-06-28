@@ -57,15 +57,16 @@ npm start
 
 The API provided by Udacity contains a small database of books that can be searched and added. 
 
-⚠️It is important to note that the database behind the api is for demo purposes only and does not reflect a real time library database. 
+⚠️ It is important to note that the database behind the api is for demo purposes only and does not reflect a real time library database.
+(More infos:[`Important`](#Important))
 
 There are 4 possible requests to the API:
-- [`get`](#get)
-- [`getAll`](#getall)
-- [`update`](#update)
-- [`search`](#search)
+- 1️⃣ [`get`](#get)
+- 2️⃣ [`getAll`](#getall)
+- 3️⃣ [`update`](#update)
+- 4️⃣ [`search`](#search)
 
-### `get`
+### 1️⃣`get`
 
 Method Signature:
 
@@ -76,7 +77,7 @@ get(bookID);
 - Returns a Promise which resolves to a JSON object containing a single book object matching the ```bookID```.
 
 
-### `getAll`
+### 2️⃣`getAll`
 
 Method Signature:
 
@@ -86,7 +87,7 @@ getAll();
 
 - Returns a Promise which resolves to a JSON object containing a collection of book objects.
 
-### `update`
+### 3️⃣`update`
 
 Method Signature:
 
@@ -98,7 +99,7 @@ update(book, shelf);
 - shelf: `<String>` contains one of ["wantToRead", "currentlyReading", "read"]
 - Returns a Promise which resolves to a JSON object containing the response data of the POST request
 
-### `search`
+### 4️⃣`search`
 
 Method Signature:
 
@@ -109,7 +110,7 @@ search(query);
 - query: `<String>`
 - Returns a Promise which resolves to a JSON object containing a collection of a maximum of 20 book objects.
 
-## Important
+## `Important
 
 The backend API uses a fixed set of cached search results and is limited to a particular set of search terms, which can be found in [SEARCH_TERMS.md](SEARCH_TERMS.md). That list of terms are the _only_ terms that will work with the backend, so don't be surprised if your searches for Basket Weaving or Bubble Wrap don't come back with any results.
 
