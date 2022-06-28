@@ -23,7 +23,7 @@ const BookShelf = ({ books, onBookUpdate }) => {
   return (
     <div className="list-books">
       <div className="list-books-title">
-        <h1>MyReads</h1>
+        <h1>Your Bookshelf</h1>
       </div>
       <div className="list-books-content">
         <div className="bookshelf">
