@@ -14,6 +14,7 @@ const Book = ({ bookData, onBookUpdate }) => {
   };
 
   const getAuthors = () => {
+    console.log(bookData);
     const authors = bookData?.authors ? bookData.authors.join(', ') : ``;
     return authors;
   };
