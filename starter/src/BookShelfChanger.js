@@ -19,13 +19,11 @@ const BookShelfChanger = ({ shelf, onBookShelfUpdate }) => {
   return (
     <div className="book-shelf-changer">
       <select onChange={handleChange} value={selected}>
-        <option value="none" disabled>
-          {isShelfUndefined ? 'Add to' : 'Move to...'}
-        </option>
+        <option disabled>{isShelfUndefined ? 'Add to' : 'Move to...'}</option>
         <option value="currentlyReading">Currently Reading</option>
         <option value="wantToRead">Want to Read</option>
         <option value="read">Read</option>
-        {isShelfUndefined ? '' : <option value="none">None</option>}
+        <option value="none">None</option>
       </select>
     </div>
   );
