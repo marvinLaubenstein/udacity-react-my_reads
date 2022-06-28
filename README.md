@@ -1,4 +1,4 @@
-#Prologue
+# Prologue
 
 This Repository is my elaboration for the React course from Udacity. 
 For everything else, please refer to the README text below, thank you.
