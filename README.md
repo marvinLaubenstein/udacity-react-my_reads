@@ -22,6 +22,19 @@ npm i
 npm start
 ```
 
+##Preview
+
+#Your own Bookshelf
+![Bildschirmfoto 2022-08-09 um 13 40 56](https://user-images.githubusercontent.com/82942834/183638843-466adcb8-6f1e-4b78-b7ea-9cd96cae8dfb.png)
+
+#Choose the status of your books
+![Bildschirmfoto 2022-08-09 um 13 44 00](https://user-images.githubusercontent.com/82942834/183639118-f33c19db-efbc-484e-a5df-a6c4075af1dd.png)
+
+#Search and add new Books
+![Bildschirmfoto 2022-08-09 um 13 41 26](https://user-images.githubusercontent.com/82942834/183638947-63a0a4a3-b882-4b1f-807d-444b38a9e3e3.png)
+![Bildschirmfoto 2022-08-09 um 13 41 40](https://user-images.githubusercontent.com/82942834/183638951-3e6aa3c0-ac4d-499a-aeb7-03ef0c62add5.png)
+
+
 
 ## File-structure 
 
